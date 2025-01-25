@@ -14,9 +14,9 @@ def compute(text: str) -> int:
     tokens = tokenizer.encode(text, return_tensors="pt")
     result = model(tokens)
 
-    return int(torch.argmax(result.logits) + 1) * 20  # Convert Range 1-5 to 1-100
+    return round(int(torch.argmax(result.logits) + 1) * .2, 1)  # Convert Range 1-5 to 0-1
 
 
 if __name__ == "__main__":
     review: str = "Guys I dont know what to say, but i find it average. its not too bad or too good. it just works."
-    print("Score:", str(compute(review)) + "%")
+    print("Score:", compute(review))
